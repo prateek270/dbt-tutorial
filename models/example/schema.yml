@@ -1,5 +1,27 @@
-
 version: 2
+
+sources:
+  - name: dbf  # Your database name
+    tables:
+      - name: orders
+        description: "Orders table in Athena"
+        columns:
+          - name: ordernumber
+            description: "Unique identifier for the order"
+          - name: orderdate
+            description: "Timestamp of the order"
+          - name: timeinday
+            description: "Time of day as a string"
+          - name: requiredate
+            description: "Required date for the order"
+          - name: shipdate
+            description: "Ship date of the order"
+          - name: status
+            description: "Order status"
+          - name: customernumber
+            description: "Unique identifier for the customer"
+          - name: comment
+            description: "Comment if any"
 
 models:
   - name: my_first_dbt_model
@@ -19,3 +41,11 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: customer_orders
+    description: "This model calculates the status of order per customer."
+    columns:
+      - name: customernumber
+        description: "The unique identifier for each customer."
+      - name: status
+        description: "The status of orders placed by the customer."
